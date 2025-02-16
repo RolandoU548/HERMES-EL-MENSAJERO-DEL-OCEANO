@@ -123,11 +123,8 @@ for arrecife_a_visitar in arrecifes_a_visitar:
         resultadodijkstra = graph.dijkstra(arrecife_inicio, arrecife_a_visitar)
         camino_recorrido = resultadodijkstra[0]
         tiempo_recorrido = resultadodijkstra[1]
-        while len(camino_recorrido) > S:
-            tiempo_recorrido -= graph.dijkstra(
-                camino_recorrido[-2], camino_recorrido[-1]
-            )[1]
-            camino_recorrido.pop(-1)
+        camino_recorrido = camino_recorrido[:S]
+        tiempo_recorrido -= graph.dijkstra(camino_recorrido[-1], arrecife_a_visitar)[1]
         tiempo_total += tiempo_recorrido
         if camino_recorrido[-1] == arrecife_a_visitar:
             print(f"{' '.join(camino_recorrido)} HERMES LLEGA")
